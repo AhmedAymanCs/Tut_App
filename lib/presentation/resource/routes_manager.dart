@@ -9,6 +9,7 @@ import 'package:acourse/presentation/screens/store_details/store_details_view.da
 import 'package:flutter/material.dart';
 
 import '../screens/main/main_view.dart';
+import '../screens/onboarding/onboarding_view.dart';
 
 class Routes
 {
@@ -17,6 +18,7 @@ class Routes
   static const String registerRoute = '/register';
   static const String forgotPasswordRoute = '/forgotPassword';
   static const String mainRoute = '/main';
+  static const String onBoardingRoute = '/onBoarding';
   static const String storeDetailsRoute = '/storeDetails';
 }
 
@@ -32,6 +34,7 @@ class RouteGenerator
       case Routes.forgotPasswordRoute : return MaterialPageRoute(builder: (_)=> const ForgotPasswordView());
       case Routes.mainRoute : return MaterialPageRoute(builder: (_)=>const MainView());
       case Routes.storeDetailsRoute : return MaterialPageRoute(builder: (_)=>const StoreDetailsView());
+      case Routes.onBoardingRoute : return MaterialPageRoute(builder: (_)=>const OnBoardingView());
 
       default: return getUnDefinededRoute();
     }

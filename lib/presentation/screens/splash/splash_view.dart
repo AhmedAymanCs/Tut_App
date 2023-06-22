@@ -5,6 +5,8 @@ import 'package:acourse/presentation/resource/constants_manager.dart';
 import 'package:acourse/presentation/resource/image_assets_manager.dart';
 import 'package:flutter/material.dart';
 
+import '../../resource/routes_manager.dart';
+
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
   @override
@@ -13,13 +15,21 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   Timer? _timer;
-  startDelay()
+
+  _startDelay()
   {
-    _timer= Timer(Duration(seconds: ConstantsManager.splashDelay), () { });
+    _timer= Timer( const Duration(seconds: ConstantsManager.splashDelay),() {
+      _goNext();
+    });
+  }
+  _goNext()
+  {
+    Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
   }
   @override
   void initState() {
     super.initState();
+    _startDelay();
   }
   @override
   Widget build(BuildContext context) {
@@ -30,5 +40,12 @@ class _SplashViewState extends State<SplashView> {
       ),
 
     );
+  }
+
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 }

@@ -59,5 +59,43 @@ ThemeData getApplicationTheme() {
             getLightStyle(color: ColorManager.white, fontSize: FontSize.s22)
     ),
     // input decoration theme (text form field)
+    inputDecorationTheme: InputDecorationTheme(
+      //enabled border style
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: ColorManager.primary,
+          width: AppSize.s1_5,
+        ),
+          borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)
+          ),
+      ),
+        //focused border style
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorManager.grey,
+            width: AppSize.s1_5,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)
+          ),
+        ),
+      //error border style
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: ColorManager.error,
+          width: AppSize.s1_5,
+        ),
+        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)
+        ),
+      ),
+      //focused error border style
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: ColorManager.primary,
+          width: AppSize.s1_5,
+        ),
+        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)
+        ),
+      ),
+    ),
   );
 }

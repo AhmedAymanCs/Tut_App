@@ -1,3 +1,4 @@
+import 'package:acourse/presentation/resource/routes_manager.dart';
 import 'package:acourse/presentation/resource/theme_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -14,27 +15,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      onGenerateRoute: RouteGenerator.getRoute,
+      initialRoute: Routes.splashRoute,
+      debugShowCheckedModeBanner: false,
       theme: getApplicationTheme(),
-      home: Home(),
     );
   }
 }
 
-class Home extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Ahmed',
-          style: TextStyle(
-           fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w800
-          ),
-        ),
-      ),
-    );
-  }
-}
 

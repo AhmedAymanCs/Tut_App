@@ -1,3 +1,4 @@
+import 'package:acourse/domain/model/models.dart';
 import 'package:acourse/presentation/resource/color_manager.dart';
 import 'package:acourse/presentation/resource/constants_manager.dart';
 import 'package:acourse/presentation/resource/image_assets_manager.dart';
@@ -42,7 +43,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Scaffold(
       backgroundColor: ColorManager.white,
       body: PageView.builder(
@@ -85,6 +87,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       ),
     );
   }
+
   Widget bottomSheetBuilder()
   {
     return Container(
@@ -170,12 +173,5 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
 }
 
-class SliderObject {
-  String title;
-  String subTitle;
-  String image;
 
-  SliderObject(
-      {required this.title, required this.subTitle, required this.image});
-}
 

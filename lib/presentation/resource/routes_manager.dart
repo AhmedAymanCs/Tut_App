@@ -9,7 +9,7 @@ import 'package:acourse/presentation/screens/store_details/store_details_view.da
 import 'package:flutter/material.dart';
 
 import '../screens/main/main_view.dart';
-import '../screens/onboarding/onboarding_view.dart';
+import '../screens/onboarding/view/onboarding_view.dart';
 
 class Routes
 {

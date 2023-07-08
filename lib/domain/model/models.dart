@@ -6,11 +6,12 @@ class SliderObject {
   SliderObject(
       {required this.title, required this.subTitle, required this.image});
 }
-class SliderObjectView
+
+class SliderViewObject
 {
-   SliderObject  sliderObject;
+   List<SliderObject>  sliderObject;
    int numOfSlides;
    int currentIndex;
-   SliderObjectView(this.sliderObject,this.currentIndex,this.numOfSlides);
+   SliderViewObject(this.sliderObject,this.currentIndex,this.numOfSlides);
 
 }

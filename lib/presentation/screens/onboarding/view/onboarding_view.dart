@@ -32,18 +32,18 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<SliderViewObject>(
-        stream:_viewModel.outputSliderViewObject ,
+        stream: _viewModel.outputSliderViewObject,
         builder: (context, snapshots) {
-      if (snapshots.connectionState == ConnectionState.waiting) {
-        return  Center(
-          child: CircularProgressIndicator(
-            color: ColorManager.primary,
-          ),
-        );
-      } else {
-        return _getBuildWidget(snapshots.data!);
-      }
-    });
+          if (snapshots.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: ColorManager.primary,
+              ),
+            );
+          } else {
+            return _getBuildWidget(snapshots.data!);
+          }
+        });
   }
 
   Widget _getBuildWidget(SliderViewObject sliderViewObject) => Scaffold(
@@ -137,9 +137,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 }
 
 class OnBoardingBuilder extends StatelessWidget {
+  final SliderObject onBoarding;
 
- final SliderObject onBoarding;
- const  OnBoardingBuilder(this.onBoarding, {super.key});
+  const OnBoardingBuilder(this.onBoarding, {super.key});
 
   @override
   Widget build(BuildContext context) {

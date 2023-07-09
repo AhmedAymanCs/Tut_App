@@ -11,8 +11,7 @@ import 'package:flutter/material.dart';
 import '../screens/main/main_view.dart';
 import '../screens/onboarding/view/onboarding_view.dart';
 
-class Routes
-{
+class Routes {
   static const String splashRoute = '/';
   static const String loginRoute = '/login';
   static const String registerRoute = '/register';
@@ -22,38 +21,41 @@ class Routes
   static const String storeDetailsRoute = '/storeDetails';
 }
 
-class RouteGenerator
-{
-  static Route<dynamic> getRoute(RouteSettings? settings)
-  {
-    switch (settings!.name)
-    {
-      case Routes.splashRoute : return MaterialPageRoute(builder: (_)=>const SplashView());
-      case Routes.loginRoute : return MaterialPageRoute(builder: (_)=> const LoginView());
-      case Routes.registerRoute : return MaterialPageRoute(builder: (_)=> const RegisterView());
-      case Routes.forgotPasswordRoute : return MaterialPageRoute(builder: (_)=> const ForgotPasswordView());
-      case Routes.mainRoute : return MaterialPageRoute(builder: (_)=>const MainView());
-      case Routes.storeDetailsRoute : return MaterialPageRoute(builder: (_)=>const StoreDetailsView());
-      case Routes.onBoardingRoute : return MaterialPageRoute(builder: (_)=>const OnBoardingView());
+class RouteGenerator {
+  static Route<dynamic> getRoute(RouteSettings? settings) {
+    switch (settings!.name) {
+      case Routes.splashRoute:
+        return MaterialPageRoute(builder: (_) => const SplashView());
+      case Routes.loginRoute:
+        return MaterialPageRoute(builder: (_) => const LoginView());
+      case Routes.registerRoute:
+        return MaterialPageRoute(builder: (_) => const RegisterView());
+      case Routes.forgotPasswordRoute:
+        return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
+      case Routes.mainRoute:
+        return MaterialPageRoute(builder: (_) => const MainView());
+      case Routes.storeDetailsRoute:
+        return MaterialPageRoute(builder: (_) => const StoreDetailsView());
+      case Routes.onBoardingRoute:
+        return MaterialPageRoute(builder: (_) => const OnBoardingView());
 
-      default: return getUnDefinededRoute();
+      default:
+        return getUnDefinededRoute();
     }
   }
 
-  static Route<dynamic> getUnDefinededRoute()
-  {
-    return MaterialPageRoute(builder: (_)=>Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          StringsManager.unDefinededRoute
-        ),
-      ),
-      body: Center(
-        child: Text(
-          StringsManager.unDefinededRoute,
-          style: getBoldStyle(color: ColorManager.grey),
-        ),
-      ),
-    ));
+  static Route<dynamic> getUnDefinededRoute() {
+    return MaterialPageRoute(
+        builder: (_) => Scaffold(
+              appBar: AppBar(
+                title: const Text(StringsManager.unDefinededRoute),
+              ),
+              body: Center(
+                child: Text(
+                  StringsManager.unDefinededRoute,
+                  style: getBoldStyle(color: ColorManager.grey),
+                ),
+              ),
+            ));
   }
 }

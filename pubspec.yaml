@@ -42,10 +42,12 @@ dependencies:
   retrofit: ^4.0.1
   dio: ^5.2.1+1
   json_serializable: ^6.7.1
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
   retrofit_generator: ^7.0.8
   build_runner: ^2.4.6
 

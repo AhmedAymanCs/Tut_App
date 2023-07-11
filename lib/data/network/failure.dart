@@ -1,6 +1,6 @@
-abstract class Failure{
+class Failure {
   int code;
   String message;
 
-  Failure(this.code,this.message);
+  Failure(this.code, this.message);
 }

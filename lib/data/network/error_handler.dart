@@ -1,6 +1,7 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'package:acourse/data/network/failure.dart';
+import 'package:dio/dio.dart';
 
 enum DataSource {
   SUCCESS,
@@ -16,16 +17,48 @@ enum DataSource {
   SEND_TIMEOUT,
   CACHE_ERROR,
   NO_INTERNET_CONNECTION,
+  BAD_RESPONSE,
   DEFAULT
 }
 
+class ErrorHandler implements Exception {
+  late Failure failure;
 
-extension DataSourceExtension on DataSource
-{
-  Failure getFailure ()
-  {
-    switch (this)
-        {
+  ErrorHandler.handle(dynamic error) {
+    if (error is DioExceptionType) {
+      //dio error
+      failure = _handleError(error);
+    } else {
+      //default error
+      failure = DataSource.DEFAULT.getFailure();
+    }
+  }
+
+  Failure _handleError(DioExceptionType error) {
+    switch (error) {
+      case DioExceptionType.connectionTimeout:
+        return DataSource.CONNECT_TIMEOUT.getFailure();
+      case DioExceptionType.sendTimeout:
+        return DataSource.SEND_TIMEOUT.getFailure();
+      case DioExceptionType.receiveTimeout:
+        return DataSource.RECEIVE_TIMEOUT.getFailure();
+      case DioExceptionType.badCertificate:
+        return DataSource.BAD_REQUEST.getFailure();
+      case DioExceptionType.badResponse:
+        return DataSource.BAD_RESPONSE.getFailure();
+      case DioExceptionType.cancel:
+        return DataSource.CANCEL.getFailure();
+      case DioExceptionType.connectionError:
+        return DataSource.NO_INTERNET_CONNECTION.getFailure();
+      case DioExceptionType.unknown:
+        return DataSource.DEFAULT.getFailure();
+    }
+  }
+}
+
+extension DataSourceExtension on DataSource {
+  Failure getFailure() {
+    switch (this) {
       case DataSource.SUCCESS:
         return Failure(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
       case DataSource.NO_CONTENT:
@@ -39,19 +72,25 @@ extension DataSourceExtension on DataSource
       case DataSource.NOT_FOUND:
         return Failure(ResponseCode.NOT_FOUND, ResponseMessage.NOT_FOUND);
       case DataSource.INTERNAL_SERVER_ERROR:
-        return Failure(ResponseCode.INTERNAL_SERVER_ERROR, ResponseMessage.INTERNAL_SERVER_ERROR);
+        return Failure(ResponseCode.INTERNAL_SERVER_ERROR,
+            ResponseMessage.INTERNAL_SERVER_ERROR);
       case DataSource.CONNECT_TIMEOUT:
-        return Failure(ResponseCode.CONNECT_TIMEOUT, ResponseMessage.CONNECT_TIMEOUT);
+        return Failure(
+            ResponseCode.CONNECT_TIMEOUT, ResponseMessage.CONNECT_TIMEOUT);
       case DataSource.CANCEL:
         return Failure(ResponseCode.CANCEL, ResponseMessage.CANCEL);
       case DataSource.RECEIVE_TIMEOUT:
-        return Failure(ResponseCode.RECEIVE_TIMEOUT, ResponseMessage.RECEIVE_TIMEOUT);
+        return Failure(
+            ResponseCode.RECEIVE_TIMEOUT, ResponseMessage.RECEIVE_TIMEOUT);
       case DataSource.SEND_TIMEOUT:
         return Failure(ResponseCode.SEND_TIMEOUT, ResponseMessage.SEND_TIMEOUT);
       case DataSource.CACHE_ERROR:
         return Failure(ResponseCode.CACHE_ERROR, ResponseMessage.CACHE_ERROR);
       case DataSource.NO_INTERNET_CONNECTION:
-        return Failure(ResponseCode.NO_INTERNET_CONNECTION, ResponseMessage.NO_INTERNET_CONNECTION);
+        return Failure(ResponseCode.NO_INTERNET_CONNECTION,
+            ResponseMessage.NO_INTERNET_CONNECTION);
+      case DataSource.BAD_RESPONSE:
+        return Failure(ResponseCode.BAD_RESPONSE, ResponseMessage.BAD_RESPONSE);
       case DataSource.DEFAULT:
         return Failure(ResponseCode.DEFAULT, ResponseMessage.DEFAULT);
     }
@@ -74,7 +113,8 @@ class ResponseCode {
   static const int SEND_TIMEOUT = -4;
   static const int CACHE_ERROR = -5;
   static const int NO_INTERNET_CONNECTION = -6;
-  static const int DEFAULT = -7;
+  static const int BAD_RESPONSE = -7;
+  static const int DEFAULT = -8;
 }
 
 class ResponseMessage {
@@ -100,5 +140,11 @@ class ResponseMessage {
   static const String CACHE_ERROR = "Cache error, Try again later";
   static const String NO_INTERNET_CONNECTION =
       "Please check your internet connection";
+  static const String BAD_RESPONSE = "Bad response, Try again later";
   static const String DEFAULT = "Some thing went wrong, Try again later";
+}
+
+class ApiInternalStatus {
+  static const int SUCCESS = 0;
+  static const int Failure = 1;
 }
